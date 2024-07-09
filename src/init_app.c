@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_app.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoto-gu <acoto-gu@student.42.fr>          #+#  +:+       +#+        */
+/*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-07-08 09:39:11 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024-07-08 09:39:11 by acoto-gu         ###   ########.fr       */
+/*   Created: 2024/07/08 09:39:11 by acoto-gu          #+#    #+#             */
+/*   Updated: 2024/07/09 10:23:52 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_init_app_data(t_app_data *app_data)
 
 int	ft_init_forks(pthread_mutex_t **forks_mutexes, int n_philos)
 {
-	size_t	i;
+	int	i;
 
 	*forks_mutexes = malloc(sizeof(pthread_mutex_t) * n_philos);
 	if (!forks_mutexes)
@@ -36,9 +36,9 @@ int	ft_init_forks(pthread_mutex_t **forks_mutexes, int n_philos)
 }
 
 int	ft_init_philos(t_philo **philos, pthread_mutex_t *forks_mutexes,
-		const t_app_data *app_data)
+		t_app_data *app_data)
 {
-	size_t	i;
+	int		i;
 	t_philo	*philo_array;
 
 	philo_array = malloc(sizeof(t_philo) * app_data->n_philosophers);

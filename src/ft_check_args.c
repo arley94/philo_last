@@ -1,22 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_args.c                                       :+:      :+:    :+:   */
+/*   ft_check_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acoto-gu <acoto-gu@student.42.fr>          #+#  +:+       +#+        */
+/*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-07-08 07:52:09 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024-07-08 07:52:09 by acoto-gu         ###   ########.fr       */
+/*   Created: 2024/07/08 07:52:09 by acoto-gu          #+#    #+#             */
+/*   Updated: 2024/07/09 10:10:27 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
+int	ft_isdigit(int c)
+{
+	if ('0' <= c && c <= '9')
+		return (1);
+	return (0);
+}
+
+int	ft_str_is_number(const char *str)
+{
+	if (*str == '\0')
+		return (0);
+	while (str)
+	{
+		if (!ft_isdigit(*str))
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
 void	ft_initialize_app_data(int argc, char const *argv[],
 			t_app_data *app_data)
 {
-	int	tmp_arg;
-
 	app_data->n_philosophers = ft_atoi(argv[1]);
 	app_data->time_to_die = ft_atoi(argv[2]);
 	app_data->time_to_eat = ft_atoi(argv[3]);
@@ -26,7 +44,7 @@ void	ft_initialize_app_data(int argc, char const *argv[],
 		app_data->n_times_to_eat = ft_atoi(argv[5]);
 }
 
-void	ft_check_arg_ranges(t_app_data *app_data)
+void	ft_check_arg_ranges(const t_app_data *app_data)
 {
 	if (app_data->n_philosophers < 2)
 		ft_error("Must be at least 2 philosophers");
@@ -49,8 +67,8 @@ void	ft_check_args(int argc, char const *argv[], t_app_data *app_data)
 			ft_error("Arguments must be numbers\n");
 		if (argc == 6 && !ft_str_is_number(argv[1]))
 			ft_error("Arguments must be numbers\n");
-		ft_initialize_app_data(argc, argv, &app_data);
-		ft_check_arg_ranges(&app_data);
+		ft_initialize_app_data(argc, argv, app_data);
+		ft_check_arg_ranges(app_data);
 	}
 	else
 		ft_error("Wrong number of arguments");
