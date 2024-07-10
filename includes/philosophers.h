@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 06:11:02 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/07/09 10:25:05 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/07/10 10:23:24 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	ft_print_msg(char *str, t_philo *philo);
 
 void	*philo_routine(void *arg);
 
-void	ft_eat(t_philo *philo);
+void	ft_eat(t_philo *philo, pthread_mutex_t *fork_one,
+	pthread_mutex_t *fork_two);
 void	ft_sleep(t_philo *philo);
 void	ft_think(t_philo *philo);
 

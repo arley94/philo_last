@@ -6,21 +6,22 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 09:53:10 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/07/10 10:17:10 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/07/10 10:20:34 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-void	ft_eat(t_philo *philo)
+void	ft_eat(t_philo *philo, pthread_mutex_t *fork_one,
+	pthread_mutex_t *fork_two)
 {
 	t_app_data	*app_data;
 	//size_t		tmp_time;
 
 	app_data = philo->app_data;
-	pthread_mutex_lock(philo->fork_l_mtx);
+	pthread_mutex_lock(fork_one);
 	ft_print_msg("has taken a fork\n", philo);
-	pthread_mutex_lock(philo->fork_r_mtx);
+	pthread_mutex_lock(fork_two);
 	ft_print_msg("has taken a fork\n", philo);
 	
 	// tmp_time = ft_get_current_time();
@@ -33,8 +34,8 @@ void	ft_eat(t_philo *philo)
 	// pthread_mutex_lock(&(philo->eat_count_mtx));
 	// philo->eat_count++;
 	// pthread_mutex_unlock(&(philo->eat_count_mtx));
-	pthread_mutex_unlock(philo->fork_l_mtx);
-	pthread_mutex_unlock(philo->fork_r_mtx);
+	pthread_mutex_unlock(fork_one);
+	pthread_mutex_unlock(fork_two);
 }
 
 void	ft_sleep(t_philo *philo)
