@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 09:53:10 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/07/09 10:13:53 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/07/10 10:17:10 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,9 @@ void	ft_sleep(t_philo *philo)
 void	ft_think(t_philo *philo)
 {
 	ft_print_msg("is thinking\n", philo);
+	if (philo->app_data->n_philosophers % 2)
+	{
+		if (philo->app_data->time_to_sleep <= philo->app_data->time_to_eat)
+			ft_usleep((philo->app_data->time_to_eat + 1) - philo->app_data->time_to_sleep);
+	}
 }
