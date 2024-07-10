@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 09:39:11 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/07/09 10:23:52 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/07/09 13:05:22 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_init_philos(t_philo **philos, pthread_mutex_t *forks_mutexes,
 
 	philo_array = malloc(sizeof(t_philo) * app_data->n_philosophers);
 	*philos = philo_array;
-	if (*philos)
+	if (!(*philos))
 		return (1);
 	i = 0;
 	while (i < app_data->n_philosophers)

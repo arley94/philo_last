@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:52:09 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/07/09 10:10:27 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/07/09 12:57:54 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_str_is_number(const char *str)
 {
 	if (*str == '\0')
 		return (0);
-	while (str)
+	while (*str)
 	{
 		if (!ft_isdigit(*str))
 			return (0);
@@ -65,12 +65,12 @@ void	ft_check_args(int argc, char const *argv[], t_app_data *app_data)
 		if (!ft_str_is_number(argv[1]) || !ft_str_is_number(argv[2])
 			|| !ft_str_is_number(argv[3]) || !ft_str_is_number(argv[4]))
 			ft_error("Arguments must be numbers\n");
-		if (argc == 6 && !ft_str_is_number(argv[1]))
+		if (argc == 6 && !ft_str_is_number(argv[5]))
 			ft_error("Arguments must be numbers\n");
 		ft_initialize_app_data(argc, argv, app_data);
 		ft_check_arg_ranges(app_data);
 	}
 	else
-		ft_error("Wrong number of arguments");
+		ft_error("Wrong number of arguments\n");
 
 }
