@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 08:04:13 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/07/09 10:27:29 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/07/10 19:54:19 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_print_msg(char *str, t_philo *philo)
 
 	data = philo->app_data;
 	pthread_mutex_lock(&data->write_mtx);
-	//if (!end_loop(data))
+	if (!ft_is_finish(philo))
 	printf("%zu %d %s", ft_get_current_time() - data->start_time, philo->id, str);
 	pthread_mutex_unlock(&data->write_mtx);
 }

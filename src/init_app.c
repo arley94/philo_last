@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 09:39:11 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/07/10 10:25:47 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/07/10 13:17:53 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_init_app_data(t_app_data *app_data)
 {
+	app_data->finish = 0;
 	app_data->start_time = ft_get_current_time();
 	pthread_mutex_init(&app_data->write_mtx, NULL);
 	pthread_mutex_init(&app_data->finish_mtx, NULL);
@@ -49,9 +50,11 @@ int	ft_init_philos(t_philo **philos, pthread_mutex_t *forks_mutexes,
 	while (i < app_data->n_philosophers)
 	{
 		philo_array[i].id = i + 1;
+		philo_array[i].eat_count = 0;
+		philo_array[i].is_eating = 0;
 		philo_array[i].app_data = app_data;
 		philo_array[i].last_eat_time = app_data->start_time;
-		pthread_mutex_init(&(philo_array[i].last_eat_time_mtx), NULL);
+		pthread_mutex_init(&(philo_array[i].eat_mtx), NULL);
 		philo_array[i].fork_l_mtx = forks_mutexes + i;
 		philo_array[i].fork_r_mtx = forks_mutexes + ((i + 1)
 			% app_data->n_philosophers);

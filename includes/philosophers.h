@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 06:11:02 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/07/10 10:23:24 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/07/10 19:52:55 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_app_data
 	//size_t			finish_thread;
 	pthread_mutex_t	write_mtx;
 	pthread_mutex_t	finish_mtx;
+	int				finish;
 }	t_app_data;
 
 typedef struct s_philo
@@ -35,7 +36,8 @@ typedef struct s_philo
 	size_t			eat_count;
 	pthread_mutex_t	*fork_l_mtx;
 	pthread_mutex_t	*fork_r_mtx;
-	pthread_mutex_t	last_eat_time_mtx;
+	pthread_mutex_t	eat_mtx;
+	int				is_eating;
 	//pthread_mutex_t	eat_count_mtx;
 	t_app_data		*app_data;
 }	t_philo;
@@ -60,6 +62,8 @@ int		ft_init_philos(t_philo **philos, pthread_mutex_t *forks_mutexes,
 void	ft_print_msg(char *str, t_philo *philo);
 
 void	*philo_routine(void *arg);
+void	*monitor_routine(void *pointer);
+int		ft_is_finish(t_philo *philo);
 
 void	ft_eat(t_philo *philo, pthread_mutex_t *fork_one,
 	pthread_mutex_t *fork_two);
