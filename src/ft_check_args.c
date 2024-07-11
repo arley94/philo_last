@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:52:09 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/07/09 12:57:54 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/07/10 20:24:04 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	ft_initialize_app_data(int argc, char const *argv[],
 
 void	ft_check_arg_ranges(const t_app_data *app_data)
 {
-	if (app_data->n_philosophers < 2)
-		ft_error("Must be at least 2 philosophers");
+	if (app_data->n_philosophers < 1)
+		ft_error("Must be at least 1 philosophers");
 	if (app_data->time_to_die < 0)
 		ft_error("time_to_die must be >= 0 ");
 	if (app_data->time_to_eat < 0)

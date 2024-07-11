@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 09:53:10 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/07/10 20:10:46 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/07/11 11:44:21 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,20 @@ void	ft_eat(t_philo *philo, pthread_mutex_t *fork_one,
 	app_data = philo->app_data;
 	pthread_mutex_lock(fork_one);
 	ft_print_msg("has taken a fork\n", philo);
+	if (philo->app_data->n_philosophers == 1)
+	{
+		ft_usleep(philo->app_data->time_to_die);
+		pthread_mutex_unlock(fork_one);
+		return ;
+	}
 	pthread_mutex_lock(fork_two);
 	ft_print_msg("has taken a fork\n", philo);
-	
 	pthread_mutex_lock(&philo->eat_mtx);
 	philo->is_eating = 1;
 	tmp_time = ft_get_current_time();
 	philo->last_eat_time = tmp_time;
 	pthread_mutex_unlock(&philo->eat_mtx);
 	ft_print_msg("is eating\n", philo);
-	
 	ft_usleep(app_data->time_to_eat);
 	// pthread_mutex_lock(&(philo->eat_count_mtx));
 	// philo->eat_count++;
@@ -40,7 +44,6 @@ void	ft_eat(t_philo *philo, pthread_mutex_t *fork_one,
 	pthread_mutex_unlock(&philo->eat_mtx);
 	pthread_mutex_unlock(fork_one);
 	pthread_mutex_unlock(fork_two);
-
 }
 
 void	ft_sleep(t_philo *philo)
