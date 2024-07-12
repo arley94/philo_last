@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 09:53:10 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/07/11 11:44:21 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/07/12 07:21:02 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_eat(t_philo *philo, pthread_mutex_t *fork_one,
 	// pthread_mutex_unlock(&(philo->eat_count_mtx));
 	pthread_mutex_lock(&philo->eat_mtx);
 	philo->is_eating = 0;
+	philo->eat_count++;
 	pthread_mutex_unlock(&philo->eat_mtx);
 	pthread_mutex_unlock(fork_one);
 	pthread_mutex_unlock(fork_two);
@@ -55,9 +56,6 @@ void	ft_sleep(t_philo *philo)
 void	ft_think(t_philo *philo)
 {
 	ft_print_msg("is thinking\n", philo);
-	if (philo->app_data->n_philosophers % 2)
-	{
-		if (philo->app_data->time_to_sleep <= philo->app_data->time_to_eat)
-			ft_usleep((philo->app_data->time_to_eat + 5) - philo->app_data->time_to_sleep);
-	}
+	if (philo->app_data->time_to_sleep <= philo->app_data->time_to_eat)
+		ft_usleep((philo->app_data->time_to_eat + 5) - philo->app_data->time_to_sleep);
 }

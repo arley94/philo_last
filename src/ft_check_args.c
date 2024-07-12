@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 07:52:09 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/07/10 20:24:04 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:58:56 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_initialize_app_data(int argc, char const *argv[],
 	app_data->time_to_die = ft_atoi(argv[2]);
 	app_data->time_to_eat = ft_atoi(argv[3]);
 	app_data->time_to_sleep = ft_atoi(argv[4]);
-	app_data->n_times_to_eat = 0;
+	app_data->n_times_to_eat = -1;
 	if (argc == 6)
 		app_data->n_times_to_eat = ft_atoi(argv[5]);
 }
@@ -54,7 +54,7 @@ void	ft_check_arg_ranges(const t_app_data *app_data)
 		ft_error("time_to_eat must be >= 0 ");
 	if (app_data->time_to_sleep < 0)
 		ft_error("time_to_sleep must be >= 0 ");
-	if (app_data->n_times_to_eat < 0)
+	if (app_data->n_times_to_eat < 0 && app_data->n_times_to_eat != -1)
 		ft_error("n_times_to_eat must be >= 0 ");
 }
 

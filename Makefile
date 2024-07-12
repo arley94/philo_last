@@ -1,5 +1,5 @@
 # NAMES
-PHILO 				:= philosophers
+PHILO 				:= philo
 
 # LIBS
 LIBS_DIR 			:= libs/

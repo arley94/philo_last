@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 06:11:02 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/07/10 19:52:55 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:00:13 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_philo
 	int				id;
 	pthread_t		t;
 	size_t			last_eat_time;
-	size_t			eat_count;
+	int				eat_count;
 	pthread_mutex_t	*fork_l_mtx;
 	pthread_mutex_t	*fork_r_mtx;
 	pthread_mutex_t	eat_mtx;

@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 09:49:21 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/07/11 11:46:49 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:28:51 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,21 @@ int	ft_is_finish(t_philo *philo)
 	return (0);
 }
 
+int	ft_philo_is_full(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->eat_mtx);
+	if (philo->eat_count == philo->app_data->n_times_to_eat)
+		return (pthread_mutex_unlock(&philo->eat_mtx), 1);
+	pthread_mutex_unlock(&philo->eat_mtx);
+	return (0);
+}
+
 void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	while (!ft_is_finish(philo))
+	while (!ft_is_finish(philo) && !ft_philo_is_full(philo))
 	{
 		if (philo->id % 2)
 			ft_eat(philo, philo->fork_l_mtx, philo->fork_r_mtx);
@@ -58,8 +67,6 @@ int	philosopher_dead(t_philo *philo)
 	return (0);
 }
 
-// Check if any philo died
-
 int	check_if_dead(t_philo *philos)
 {
 	int	i;
@@ -80,36 +87,32 @@ int	check_if_dead(t_philo *philos)
 	return (0);
 }
 
-// Checks if all the philos ate the num_of_meals
-
-/* int	check_if_all_ate(t_philo *philos)
+int	check_if_all_ate(t_philo *philos)
 {
 	int	i;
 	int	finished_eating;
 
 	i = 0;
 	finished_eating = 0;
-	if (philos[0].num_times_to_eat == -1)
+	if (philos[0].app_data->n_times_to_eat == -1)
 		return (0);
-	while (i < philos[0].num_of_philos)
+	while (i < philos[0].app_data->n_philosophers)
 	{
-		pthread_mutex_lock(philos[i].meal_lock);
-		if (philos[i].meals_eaten >= philos[i].num_times_to_eat)
+		pthread_mutex_lock(&(philos[i].eat_mtx));
+		if (philos[i].eat_count >= philos[i].app_data->n_times_to_eat)
 			finished_eating++;
-		pthread_mutex_unlock(philos[i].meal_lock);
+		pthread_mutex_unlock(&(philos[i].eat_mtx));
 		i++;
 	}
-	if (finished_eating == philos[0].num_of_philos)
+	if (finished_eating == philos[0].app_data->n_philosophers)
 	{
-		pthread_mutex_lock(philos[0].dead_lock);
-		*philos->dead = 1;
-		pthread_mutex_unlock(philos[0].dead_lock);
+		pthread_mutex_lock(&(philos[0].app_data->finish_mtx));
+		philos->app_data->finish = 1;
+		pthread_mutex_unlock(&(philos[0].app_data->finish_mtx));
 		return (1);
 	}
 	return (0);
-} */
-
-// Monitor thread routine
+}
 
 void	*monitor_routine(void *pointer)
 {
@@ -117,7 +120,7 @@ void	*monitor_routine(void *pointer)
 
 	philos = (t_philo *)pointer;
 	while (1)
-		if (check_if_dead(philos) == 1 /*|| check_if_all_ate(philos) == 1*/)
+		if (check_if_dead(philos) == 1 || check_if_all_ate(philos) == 1)
 			break ;
 	return (pointer);
 }
