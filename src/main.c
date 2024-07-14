@@ -6,7 +6,7 @@
 /*   By: acoto-gu <acoto-gu@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 05:52:32 by acoto-gu          #+#    #+#             */
-/*   Updated: 2024/07/12 18:36:19 by acoto-gu         ###   ########.fr       */
+/*   Updated: 2024/07/14 22:39:30 by acoto-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ int	main(int argc, char const *argv[])
 
 	ft_check_args(argc, argv, &app_data);
 	ft_init_app_data(&app_data);
-	if (ft_init_forks(&forks_mutexes, app_data.n_philosophers))
+	if (ft_init_forks(&forks_mutexes, app_data.n_philosophers) != 0)
 		ft_error("Error creating mutex for forks\n");
-	ft_init_philos(&philos, forks_mutexes, &app_data);
+	if (ft_init_philos(&philos, forks_mutexes, &app_data) != 0)
+		ft_error("Error initializing philos\n");
 	ft_manage_threads(philos);
 	return (0);
 }
