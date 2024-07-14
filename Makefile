@@ -32,7 +32,7 @@ OBJ					:=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
 # COMPILER OPTIONS
 CC					:= gcc
-CFLAGS				:= -Wall -Werror -Wextra -g3
+CFLAGS				:= -Wall -Werror -Wextra -pthread -g3 -fsanitize=address
 INCLUDE 			:= -I ./includes
 
 # COLORS
