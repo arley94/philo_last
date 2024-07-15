@@ -71,7 +71,7 @@ int	ft_init_philos(t_philo **philos, pthread_mutex_t *forks_mutexes,
 		}
 		((*philos) + i)->fork_l_mtx = forks_mutexes + i;
 		((*philos) + i)->fork_r_mtx = forks_mutexes + ((i + 1)
-			% app_data->n_philosophers);
+				% app_data->n_philosophers);
 		i++;
 	}
 	return (0);

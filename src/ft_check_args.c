@@ -72,5 +72,4 @@ void	ft_check_args(int argc, char const *argv[], t_app_data *app_data)
 	}
 	else
 		ft_error("Wrong number of arguments\n");
-
 }

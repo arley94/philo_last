@@ -27,7 +27,6 @@ void	ft_clean_all(t_app_data *app_data, t_philo *philos)
 
 	pthread_mutex_destroy(&(app_data->write_mtx));
 	pthread_mutex_destroy(&(app_data->finish_mtx));
-
 	ft_destroy_nmutex(app_data->forks_mutexes, app_data->n_philosophers);
 	free(app_data->forks_mutexes);
 	i = 0;
@@ -38,4 +37,3 @@ void	ft_clean_all(t_app_data *app_data, t_philo *philos)
 	}
 	free(philos);
 }
-

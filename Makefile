@@ -23,7 +23,8 @@ SRC_FILES 			:= 	ft_check_args.c \
 						routines.c \
 						time.c \
 						utils.c \
-						clean.c
+						clean.c \
+						routine_aux.c
 SRC 				:= $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 # OBJECT FILES

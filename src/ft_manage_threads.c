@@ -46,18 +46,12 @@ void	join_threads(t_philo *philos)
 int	ft_manage_threads(t_philo *philos)
 {
 	pthread_t		deads_monitor;
-	//pthread_t		all_eats_monitor;
 
-	//init_monitor_thread(&deads_monitor, deads_monitor_routine, filo_array);
-	//init_monitor_thread(&all_eats_monitor, all_eats_monitor_routine, filo_array);
 	if (pthread_create(&deads_monitor, NULL, monitor_routine, philos) != 0)
 		return (1);
 	if (init_philo_threads(philos, philo_routine) != 0)
 		return (1);
 	pthread_join(deads_monitor, NULL);
-	//pthread_join(all_eats_monitor, NULL);
-	//printf("dead monitor end\n");
 	join_threads(philos);
-	//printf("all philos end\n");
 	return (0);
 }

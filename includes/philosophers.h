@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <sys/time.h>
 #include <pthread.h>
+
 typedef struct s_app_data
 {
 	int				n_philosophers;
@@ -43,7 +44,6 @@ typedef struct s_philo
 	t_app_data		*app_data;
 }	t_philo;
 
-
 int		ft_atoi(const char *nptr);
 int		ft_isdigit(int c);
 int		ft_str_is_number(const char *str);
@@ -62,12 +62,14 @@ int		ft_init_philos(t_philo **philos, pthread_mutex_t *forks_mutexes,
 
 void	ft_print_msg(char *str, t_philo *philo);
 
+int		check_if_dead(t_philo *philos);
+int		check_if_all_ate(t_philo *philos);
 void	*philo_routine(void *arg);
 void	*monitor_routine(void *pointer);
 int		ft_is_finish(t_philo *philo);
 
 void	ft_eat(t_philo *philo, pthread_mutex_t *fork_one,
-	pthread_mutex_t *fork_two);
+			pthread_mutex_t *fork_two);
 void	ft_sleep(t_philo *philo);
 void	ft_think(t_philo *philo);
 

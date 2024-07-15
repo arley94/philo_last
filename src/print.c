@@ -20,6 +20,7 @@ void	ft_print_msg(char *str, t_philo *philo)
 	data = philo->app_data;
 	pthread_mutex_lock(&data->write_mtx);
 	if (!ft_is_finish(philo))
-	printf("%zu %d %s", ft_get_current_time() - data->start_time, philo->id, str);
+		printf("%zu %d %s", ft_get_current_time()
+			- data->start_time, philo->id, str);
 	pthread_mutex_unlock(&data->write_mtx);
 }

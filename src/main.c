@@ -15,7 +15,6 @@
 int	main(int argc, char const *argv[])
 {
 	t_app_data		app_data;
-	//pthread_mutex_t	*forks_mutexes;
 	t_philo			*philos;
 
 	ft_check_args(argc, argv, &app_data);

@@ -21,12 +21,6 @@ void	ft_eat(t_philo *philo, pthread_mutex_t *fork_one,
 	app_data = philo->app_data;
 	pthread_mutex_lock(fork_one);
 	ft_print_msg("has taken a fork\n", philo);
-	if (philo->app_data->n_philosophers == 1)
-	{
-		ft_usleep(philo->app_data->time_to_die);
-		pthread_mutex_unlock(fork_one);
-		return ;
-	}
 	pthread_mutex_lock(fork_two);
 	ft_print_msg("has taken a fork\n", philo);
 	pthread_mutex_lock(&philo->eat_mtx);
@@ -36,9 +30,6 @@ void	ft_eat(t_philo *philo, pthread_mutex_t *fork_one,
 	pthread_mutex_unlock(&philo->eat_mtx);
 	ft_print_msg("is eating\n", philo);
 	ft_usleep(app_data->time_to_eat);
-	// pthread_mutex_lock(&(philo->eat_count_mtx));
-	// philo->eat_count++;
-	// pthread_mutex_unlock(&(philo->eat_count_mtx));
 	pthread_mutex_lock(&philo->eat_mtx);
 	philo->is_eating = 0;
 	philo->eat_count++;
@@ -57,5 +48,6 @@ void	ft_think(t_philo *philo)
 {
 	ft_print_msg("is thinking\n", philo);
 	if (philo->app_data->time_to_sleep <= philo->app_data->time_to_eat)
-		ft_usleep((philo->app_data->time_to_eat + 5) - philo->app_data->time_to_sleep);
+		ft_usleep((philo->app_data->time_to_eat + 5)
+			- philo->app_data->time_to_sleep);
 }
