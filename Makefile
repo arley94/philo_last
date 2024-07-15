@@ -22,7 +22,8 @@ SRC_FILES 			:= 	ft_check_args.c \
 						print.c \
 						routines.c \
 						time.c \
-						utils.c
+						utils.c \
+						clean.c
 SRC 				:= $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 # OBJECT FILES
@@ -32,7 +33,7 @@ OBJ					:=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
 # COMPILER OPTIONS
 CC					:= gcc
-CFLAGS				:= -Wall -Werror -Wextra -pthread -g3 -fsanitize=address
+CFLAGS				:= -Wall -Werror -Wextra -pthread 
 INCLUDE 			:= -I ./includes
 
 # COLORS

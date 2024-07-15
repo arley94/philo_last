@@ -15,16 +15,14 @@
 int	init_philo_threads(t_philo *philos,
 			void *(*philo_routine)(void *arg))
 {
-	t_philo			*philo;
-	t_app_data		*data;
+	t_philo		*philo;
 	int			i;
 
-	data = philos[0].app_data;
 	i = 0;
-	while (i < data->n_philosophers)
+	while (i < philos->app_data->n_philosophers)
 	{
 		philo = philos + i;
-		if (pthread_create(&(philo->t), NULL, philo_routine, (void *)philo) != 0)
+		if (pthread_create(&(philo->t), NULL, philo_routine, (void *)philo))
 			return (1);
 		i++;
 	}
@@ -34,12 +32,10 @@ int	init_philo_threads(t_philo *philos,
 void	join_threads(t_philo *philos)
 {
 	t_philo		*philo;
-	t_app_data	*data;
 	int			i;
 
-	data = philos[0].app_data;
 	i = 0;
-	while (i < data->n_philosophers)
+	while (i < philos->app_data->n_philosophers)
 	{
 		philo = philos + i;
 		pthread_join(philo->t, NULL);
@@ -56,11 +52,12 @@ int	ft_manage_threads(t_philo *philos)
 	//init_monitor_thread(&all_eats_monitor, all_eats_monitor_routine, filo_array);
 	if (pthread_create(&deads_monitor, NULL, monitor_routine, philos) != 0)
 		return (1);
-	init_philo_threads(philos, philo_routine);
+	if (init_philo_threads(philos, philo_routine) != 0)
+		return (1);
 	pthread_join(deads_monitor, NULL);
 	//pthread_join(all_eats_monitor, NULL);
 	//printf("dead monitor end\n");
 	join_threads(philos);
 	//printf("all philos end\n");
-
+	return (0);
 }

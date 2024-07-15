@@ -52,10 +52,15 @@ int	philosopher_dead(t_philo *philo)
 	int	time_since_last_meal;
 	int	is_eating;
 	int	last_eat_time;
+	int	eat_count;
 
+	eat_count = 0;
 	pthread_mutex_lock(&(philo->eat_mtx));
 	last_eat_time = philo->last_eat_time;
+	eat_count = philo->eat_count;
 	pthread_mutex_unlock(&(philo->eat_mtx));
+	if (eat_count == philo->app_data->n_times_to_eat)
+		return (0);
 	time_since_last_meal = ft_get_current_time() - last_eat_time;
 	if (time_since_last_meal >= philo->app_data->time_to_die)
 	{

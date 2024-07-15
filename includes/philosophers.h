@@ -26,6 +26,7 @@ typedef struct s_app_data
 	pthread_mutex_t	write_mtx;
 	pthread_mutex_t	finish_mtx;
 	int				finish;
+	pthread_mutex_t	*forks_mutexes;
 }	t_app_data;
 
 typedef struct s_philo
@@ -70,5 +71,7 @@ void	ft_eat(t_philo *philo, pthread_mutex_t *fork_one,
 void	ft_sleep(t_philo *philo);
 void	ft_think(t_philo *philo);
 
-void	ft_manage_threads(t_philo *philos);
+int		ft_manage_threads(t_philo *philos);
 
+void	ft_destroy_nmutex(pthread_mutex_t *mutex_array, int n);
+void	ft_clean_all(t_app_data *app_data, t_philo *philos);
